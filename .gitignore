@@ -1,0 +1,38 @@
+# Build
+build/
+cmake-build-*/
+out/
+bin/
+
+# Compiled files
+*.exe
+*.dll
+*.so
+*.a
+*.o
+*.obj
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+install_manifest.txt
+compile_commands.json
+
+# Visual Studio Code
+.vscode/
+
+# EDORA virtual drives
+EDORA_DRIVES/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
