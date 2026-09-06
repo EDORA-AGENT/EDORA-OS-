@@ -19,7 +19,7 @@
 It isn't Windows.
 
 It's EDORA.»
-
+###MADE BY XIAO LOUIE - a 12-year-old programmer
 </div>---
 
 🧠 What is EDORA OS?
