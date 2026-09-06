@@ -19,11 +19,11 @@
 It isn't Windows.
 
 It's EDORA.»
-###MADE BY XIAO LOUIE - a 12-year-old programmer
+
 </div>---
 
 🧠 What is EDORA OS?
-
+##MADE BY XIAO LOUIE - a 12-year-old programmer
 EDORA OS is an experimental operating-system simulation written in C++.
 
 The project is designed to recreate the feeling of using an operating system — including a kernel layer, login system, shell, virtual drives, filesystem management, applications, security simulation and network utilities — while still running as a normal application on the host operating system.
