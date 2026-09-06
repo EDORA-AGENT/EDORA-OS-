@@ -23,6 +23,7 @@ It's EDORA.»
 </div>---
 
 🧠 What is EDORA OS?
+
 EDORA OS is an experimental operating-system simulation written in C++.
 
 The project is designed to recreate the feeling of using an operating system — including a kernel layer, login system, shell, virtual drives, filesystem management, applications, security simulation and network utilities — while still running as a normal application on the host operating system.
@@ -803,7 +804,7 @@ Something that I could build from scratch and continuously improve.
 
 👨‍💻 Developer
 
-<div align="center">Xiao Louie
+<div align="center">Xiao Louie - a 12 year old programmer
 
 EDORA STUDIO
 
@@ -836,23 +837,5 @@ If you like the project:
 user@edora:C:\$ _
 
 Think. Build. Break. Rebuild.
-<div align="center"><img src="https://capsule-render.vercel.app/api?type=waving&color=0:050505,50:00C6FF,100:0066FF&height=220&section=header&text=EDORA%20OS&fontSize=70&fontColor=FFFFFF&animation=fadeIn&fontAlignY=35&desc=Experimental%20Operating%20System%20Simulation&descAlignY=58&descSize=18" width="100%"/>🖥️ EDORA OS
 
-"A tiny operating-system experience built with C++"
-
-<p>
-  <img src="https://img.shields.io/badge/C%2B%2B-17%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white"/>
-  <img src="https://img.shields.io/badge/EDORA%20OS-Experimental-00C6FF?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Architecture-Modular-7F00FF?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge"/>
-</p>MADE BY XIAO LOUIE — A 12-YEAR-OLD PROGRAMMER 🚀
-
-<p>
-  <b>Kernel</b> •
-  <b>Shell</b> •
-  <b>Virtual Filesystem</b> •
-  <b>Login</b> •
-  <b>Network</b> •
-  <b>Applications</b>
-</p><br>«EDORA OS isn't Linux.</p><br>
 <br><img src="https://capsule-render.vercel.app/api?type=waving&color=0:0066FF,50:00C6FF,100:050505&height=120&section=footer" width="100%"/></div>
