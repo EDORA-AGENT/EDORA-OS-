@@ -1,8 +1,10 @@
 #include "../edora.h"
 #include "shell.h"
+#include "../login/login.h"
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -12,10 +14,8 @@ void shellStart()
     cout << "============================================\n";
     cout << "               EDORA SHELL\n";
     cout << "============================================\n";
-
     cout << "EDORA-SHELL " << SHELL_VERSION << "\n";
     cout << "Type 'help' to see available commands.\n";
-
     cout << "============================================\n";
     cout << "\n";
 }
@@ -25,7 +25,7 @@ void showPrompt()
     if (isRoot)
         cout << "root@edora:";
     else
-        cout << "user@edora:";
+        cout << getCurrentUser() << "@edora:";
 
     cout << getPath();
 
@@ -37,20 +37,33 @@ void showPrompt()
 
 void shellLoop()
 {
-    string command;
+    string input;
 
     showPrompt();
-    getline(cin, command);
 
-    if (command.empty())
+    getline(cin, input);
+
+    if (input.empty())
         return;
 
-    executeCommand(command);
+    executeCommand(input);
 }
 
-void executeCommand(const string& command)
+void executeCommand(const string& input)
 {
+    stringstream ss(input);
+
+    string command;
+    string argument;
+
+    ss >> command;
+    getline(ss, argument);
+
+    if (!argument.empty() && argument[0] == ' ')
+        argument.erase(0, 1);
+
     // BASIC
+
     if (command == "help")
         commandHelp();
 
@@ -65,10 +78,8 @@ void executeCommand(const string& command)
 
 
     // FILESYSTEM
-    else if (command == "ls")
-        commandLs();
 
-    else if (command == "dir")
+    else if (command == "ls" || command == "dir")
         commandLs();
 
     else if (command == "cd")
@@ -91,6 +102,7 @@ void executeCommand(const string& command)
 
 
     // FILE COMMANDS
+
     else if (command == "copy")
         commandCopy();
 
@@ -102,6 +114,7 @@ void executeCommand(const string& command)
 
 
     // DRIVES
+
     else if (command == "C:")
     {
         currentDrive = 'C';
@@ -128,6 +141,7 @@ void executeCommand(const string& command)
 
 
     // APPLICATIONS
+
     else if (command == "notepad")
         notepad();
 
@@ -154,11 +168,18 @@ void executeCommand(const string& command)
 
 
     // NETWORK
+
     else if (command == "ping")
-        commandPing();
+    {
+        if (!argument.empty())
+            commandPing(argument);
+        else
+            commandPing();
+    }
 
 
     // SYSTEM
+
     else if (command == "neofetch")
         commandNeofetch();
 
@@ -173,17 +194,36 @@ void executeCommand(const string& command)
 
 
     // SECURITY
+
     else if (command == "sudo")
         commandSudo();
 
     else if (command == "root")
         commandRoot();
 
+    else if (command == "passwd")
+        changePassword();
+
+    else if (command == "logout")
+    {
+        if (isRoot)
+        {
+            isRoot = false;
+            cout << "Exited root mode.\n";
+        }
+
+        logoutUser();
+
+        if (!loginSystem())
+            running = false;
+    }
+
     else if (command == "panic")
         kernelPanic();
 
 
     // POWER
+
     else if (command == "reboot")
         rebootSystem();
 
@@ -192,6 +232,7 @@ void executeCommand(const string& command)
 
 
     // EXIT ROOT
+
     else if (command == "exit")
     {
         if (isRoot)
@@ -204,6 +245,9 @@ void executeCommand(const string& command)
             cout << "Use 'shutdown' to shut down EDORA OS.\n";
         }
     }
+
+
+    // UNKNOWN COMMAND
 
     else
     {

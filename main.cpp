@@ -1,4 +1,6 @@
 #include "edora.h"
+#include "login/login.h"
+#include "filesystem/filesystem.h"
 
 // ======================================================
 //                    EDORA OS
@@ -6,13 +8,9 @@
 // ======================================================
 
 bool running = true;
-
 bool isRoot = false;
 
-string username = "user";
-
 fs::path edoraRoot;
-
 fs::path currentPath;
 
 char currentDrive = 'C';
@@ -23,42 +21,24 @@ char currentDrive = 'C';
 
 int main()
 {
-    // ------------------------------------------
-    // EDORA ROOT DIRECTORY
-    // ------------------------------------------
-
     edoraRoot = fs::current_path() / "EDORA_DRIVES";
-
-    // ------------------------------------------
-    // INITIALIZE KERNEL
-    // ------------------------------------------
-
-    kernelInit();
-
-    // ------------------------------------------
-    // INITIALIZE FILESYSTEM
-    // ------------------------------------------
 
     filesystemInit();
 
-    // ------------------------------------------
-    // START SHELL
-    // ------------------------------------------
+    kernelInit();
+
+    if (!loginSystem())
+    {
+        cout << "Login failed.\n";
+        return 1;
+    }
 
     shellStart();
-
-    // ------------------------------------------
-    // MAIN LOOP
-    // ------------------------------------------
 
     while (running)
     {
         shellLoop();
     }
-
-    // ------------------------------------------
-    // SHUTDOWN
-    // ------------------------------------------
 
     kernelShutdown();
 

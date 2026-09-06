@@ -1,6 +1,8 @@
 #ifndef EDORA_PING_H
 #define EDORA_PING_H
 
-void commandPing();
+#include <string>
+
+void commandPing(const std::string& host = "");
 
 #endif

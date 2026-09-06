@@ -1,6 +1,6 @@
 #include "../edora.h"
 #include "basic.h"
-
+#include "../login/login.h"
 #include <iostream>
 #include <cstdlib>
 
@@ -65,7 +65,7 @@ void commandClear()
 
 void commandWhoami()
 {
-    cout << username;
+    cout << getCurrentUser();
 
     if (isRoot)
         cout << " (root)";

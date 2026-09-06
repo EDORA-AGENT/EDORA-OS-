@@ -17,5 +17,9 @@ void commandMkdir();
 void commandTouch();
 void commandRm();
 void commandCat();
+#include "../edora.h"
 
+void createSystemFile(const fs::path& path, const string& content);
+void createSystemFiles();
+void writeBootLog();
 #endif

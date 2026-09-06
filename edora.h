@@ -27,7 +27,13 @@ extern fs::path edoraRoot;
 extern fs::path currentPath;
 
 extern char currentDrive;
-
+extern bool running;
+extern bool isRoot;
+extern string username;
+extern string password;
+extern fs::path edoraRoot;
+extern fs::path currentPath;
+extern char currentDrive;
 // ======================================================
 //                    SYSTEM CONSTANTS
 // ======================================================
@@ -151,5 +157,5 @@ void commandSudo();
 void commandRoot();
 
 void commandDelete();
-
+void commandPasswd();
 #endif

@@ -1,5 +1,6 @@
 #include "../edora.h"
 #include "system.h"
+#include "../login/login.h"
 
 #include <iostream>
 #include <chrono>
@@ -25,7 +26,7 @@ void commandNeofetch()
     cout << "       Version  : " << EDORA_VERSION << "\n";
     cout << "       Kernel   : " << KERNEL_VERSION << "\n";
     cout << "       Shell    : " << SHELL_VERSION << "\n";
-    cout << "       User     : " << username << "\n";
+    cout << "       User     : " << getCurrentUser() << "\n";
     cout << "       Drive    : " << currentDrive << ":\n";
     cout << "       Path     : " << getPath() << "\n";
     cout << "       Mode     : " << (isRoot ? "ROOT" : "USER") << "\n";
@@ -43,7 +44,7 @@ void commandSysinfo()
     cout << "Version          : " << EDORA_VERSION << "\n";
     cout << "Kernel           : " << KERNEL_VERSION << "\n";
     cout << "Shell            : " << SHELL_VERSION << "\n";
-    cout << "Username         : " << username << "\n";
+    cout << "Username         : " << getCurrentUser() << "\n";
     cout << "Current Drive    : " << currentDrive << ":\n";
     cout << "Current Path     : " << getPath() << "\n";
     cout << "Security Mode    : " << (isRoot ? "ROOT" : "USER") << "\n";

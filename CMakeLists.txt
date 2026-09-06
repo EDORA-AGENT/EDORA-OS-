@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(EDORA-OS
     main.cpp
-
+    login/login.cpp
     kernel/kernel.cpp
 
     shell/shell.cpp

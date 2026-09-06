@@ -61,6 +61,13 @@ void filesystemInit()
     }
 
     cout << "============================================\n";
+    // create system files
+    createSystemFiles();
+    // write boot log
+    writeBootLog();
+    //main drive
+    currentDrive = 'C';
+    currentPath = drivePath('C');
 }
 
 // ======================================================
@@ -512,4 +519,115 @@ void commandCat()
     }
 
     cout << "--------------------------------------------\n";
+}
+// ======================================================
+//                CREATE SYSTEM FILE
+// ======================================================
+
+void createSystemFile(const fs::path& path, const string& content)
+{
+    // File đã tồn tại -> không ghi đè
+    if (fs::exists(path))
+        return;
+
+    try
+    {
+        ofstream file(path);
+
+        if (!file)
+        {
+            cout << "[FAIL] Cannot create: "
+                 << path.filename().string()
+                 << "\n";
+            return;
+        }
+
+        file << content;
+        file.close();
+
+        cout << "[ OK ] Created: "
+             << path.filename().string()
+             << "\n";
+    }
+    catch (...)
+    {
+        cout << "[FAIL] Cannot create: "
+             << path.filename().string()
+             << "\n";
+    }
+}
+void createSystemFiles()
+{
+    fs::path system = edoraRoot / "C" / "system";
+
+    createSystemFile(
+        system / "kernel.sys",
+        "KERNEL_NAME=EDORA-KERNEL\n"
+        "KERNEL_VERSION=1.0\n"
+        "ARCHITECTURE=x86_64\n"
+        "STATUS=RUNNING\n"
+    );
+
+    createSystemFile(
+        system / "config.sys",
+        "OS_NAME=EDORA OS\n"
+        "OS_VERSION=1.0\n"
+        "HOSTNAME=edora\n"
+        "DEFAULT_DRIVE=C\n"
+        "SHELL=EDORA-SHELL\n"
+    );
+
+    createSystemFile(
+        system / "users.sys",
+        "[user]\n"
+        "USERNAME=user\n"
+        "PRIVILEGE=USER\n"
+        "STATUS=ACTIVE\n"
+    );
+
+    createSystemFile(
+        system / "security.sys",
+        "SECURITY_MODE=STANDARD\n"
+        "PASSWORD_REQUIRED=YES\n"
+        "ROOT_ENABLED=YES\n"
+    );
+
+    createSystemFile(
+        system / "services.sys",
+        "KERNEL=RUNNING\n"
+        "FILESYSTEM=RUNNING\n"
+        "SHELL=RUNNING\n"
+        "SECURITY=RUNNING\n"
+    );
+
+    createSystemFile(
+        system / "version.sys",
+        "OS=EDORA OS\n"
+        "VERSION=1.0\n"
+        "KERNEL=1.0\n"
+        "BUILD=1001\n"
+    );
+}
+void writeBootLog()
+{
+    fs::path logPath = edoraRoot / "C" / "system" / "boot.log";
+
+    ofstream log(logPath, ios::app);
+
+    if (!log)
+        return;
+
+    auto now = chrono::system_clock::now();
+    time_t currentTime = chrono::system_clock::to_time_t(now);
+
+    tm localTime{};
+
+#ifdef _WIN32
+    localtime_s(&localTime, &currentTime);
+#else
+    localtime_r(&currentTime, &localTime);
+#endif
+
+    log << "[" << put_time(&localTime, "%Y-%m-%d %H:%M:%S") << "] "
+        << "EDORA OS booted successfully.\n";
 }

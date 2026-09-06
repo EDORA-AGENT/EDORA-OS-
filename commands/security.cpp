@@ -1,8 +1,8 @@
 #include "../edora.h"
+#include "../login/login.h"
 #include "security.h"
 
 #include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -14,14 +14,16 @@ void commandSudo()
         return;
     }
 
-    string password;
+    if (!isLoggedIn())
+    {
+        cout << "No user is logged in.\n";
+        return;
+    }
 
-    cout << "[sudo] password for " << username << ": ";
-    getline(cin, password);
-
-    if (password == ROOT_PASSWORD)
+    if (verifyCurrentPassword())
     {
         isRoot = true;
+
         cout << "Authentication successful.\n";
         cout << "You are now root.\n";
     }
@@ -44,7 +46,7 @@ void commandRoot()
     }
     else
     {
-        cout << "Current user : " << username << "\n";
+        cout << "Current user : " << getCurrentUser() << "\n";
         cout << "Privilege    : USER\n";
         cout << "Status       : LIMITED ACCESS\n";
     }
@@ -67,10 +69,17 @@ void commandDelete()
     cout << "The requested operation is simulated only.\n";
     cout << "Real operating system files will NEVER be deleted.\n";
     cout << "\n";
-    cout << "systemcl deletion request accepted.\n";
+
+    cout << "System deletion request accepted.\n";
     cout << "Simulating system destruction...\n";
     cout << "EDORA OS has been halted.\n";
+
     cout << "--------------------------------------------\n";
 
     running = false;
+}
+
+void commandPasswd()
+{
+    changePassword();
 }
