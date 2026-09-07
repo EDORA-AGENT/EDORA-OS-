@@ -8,6 +8,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00c6ff,100:0072ff&height=180&section=header&text=EDORA%20OS&fontSize=55&fontColor=ffffff&animation=fadeIn&fontAlignY=35" width="100%"/>
 
+
 ### ⚡ A lightweight operating system simulator written in C++
 
 [![Version](https://img.shields.io/badge/EDORA%20OS-v1.0-00c6ff?style=for-the-badge)](https://github.com/EDORA-AGENT/EDORA-OS-)
