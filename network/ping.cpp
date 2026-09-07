@@ -25,12 +25,12 @@ void commandPing(const string& host)
     cout << "--------------------------------------------\n";
 
 #ifdef _WIN32
-    string command = "ping -n 4 " + target;
+    string cmd = "ping -n 4 " + target;
 #else
-    string command = "ping -c 4 " + target;
+    string cmd = "ping -c 4 " + target;
 #endif
 
-    system(command.c_str());
+    system(cmd.c_str());
 
     cout << "--------------------------------------------\n";
 }

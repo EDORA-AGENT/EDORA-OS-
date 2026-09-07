@@ -1,612 +1,307 @@
-# 🖥️ EDORA OS
+<div align="center">
 
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:050505,50:00c6ff,100:0072ff&height=220&section=header&text=EDORA%20OS&fontSize=60&fontColor=ffffff&animation=fadeIn&fontAlignY=35" />
-</p>
+<a href="https://github.com/EDORA-AGENT/EDORA-OS-">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=28&duration=3000&pause=800&color=00C8FF&center=true&vCenter=true&width=700&lines=Welcome+to+EDORA+OS;A+Custom+OS+Simulator;Built+with+C%2B%2B;EDORA+OS+v1.0" alt="Typing SVG" />
+</a>
 
-<p align="center">
-  <b>⚡ EDO Shell • 💾 Virtual Filesystem • 🔐 EDO Security • 🌐 Network Tools</b>
-</p>
+<br>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/C%2B%2B-17%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white">
-  <img src="https://img.shields.io/badge/EDORA%20OS-v1.3-00c6ff?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Virtual%20OS-Experimental-8A2BE2?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Status-Active-00C853?style=for-the-badge">
-</p>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00c6ff,100:0072ff&height=180&section=header&text=EDORA%20OS&fontSize=55&fontColor=ffffff&animation=fadeIn&fontAlignY=35" width="100%"/>
 
----
+### ⚡ A lightweight operating system simulator written in C++
 
-# 🧠 What Is EDORA OS?
+[![Version](https://img.shields.io/badge/EDORA%20OS-v1.0-00c6ff?style=for-the-badge)](https://github.com/EDORA-AGENT/EDORA-OS-)
+[![Language](https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge\&logo=cplusplus\&logoColor=white)](https://isocpp.org/)
+[![Build](https://img.shields.io/badge/Build-CMake-064F8C?style=for-the-badge\&logo=cmake\&logoColor=white)](https://cmake.org/)
+[![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?style=for-the-badge\&logo=windows\&logoColor=white)](https://www.microsoft.com/windows)
+[![Status](https://img.shields.io/badge/Status-Development%20Paused-yellow?style=for-the-badge)](#-development-status)
 
-**EDORA OS** is an experimental operating-system simulation written in **C++**.
-
-It provides a command-line environment inspired by traditional operating systems while running safely as a normal application on the host machine.
-
-Instead of implementing a real kernel and hardware drivers, EDORA OS creates its own:
-
-```text
-┌──────────────────────────────────────────┐
-│              🖥️ EDORA OS                 │
-├──────────────────────────────────────────┤
-│              EDO SHELL                   │
-├──────────────────────────────────────────┤
-│          💾 VIRTUAL FILESYSTEM            │
-├──────────────────────────────────────────┤
-│     C:       D:       E:                 │
-│   SYSTEM    DATA    BACKUP               │
-├──────────────────────────────────────────┤
-│             HOST OS                     │
-└──────────────────────────────────────────┘
-```
-
-> **A small C++ project designed to feel like a tiny operating system.**
+</div>
 
 ---
 
-# ⚡ Features
+# 🖥️ What is EDORA OS?
 
-EDORA OS currently includes a surprisingly large collection of shell features.
+**EDORA OS** is a custom operating system simulator written in **C++**.
 
-### 💾 Virtual Filesystem
+It is designed to simulate the experience of using a real operating system while remaining completely safe inside its own virtual filesystem.
 
-EDORA creates its own filesystem inside:
+EDORA OS includes:
+
+* 🖥️ Custom shell
+* 💾 Virtual drives
+* 📁 Virtual filesystem
+* 🔐 User authentication
+* 👑 Root / sudo system
+* 📝 Text editor
+* 🔢 Binary editor
+* 🧩 EDO file system
+* 🌐 Network ping
+* 🎮 Built-in game
+* ⚙️ Kernel simulation
+* 📊 System information
+* 🔄 Reboot & shutdown simulation
+
+> **EDORA OS does not modify your real Windows filesystem.**
+
+---
+
+# ✨ Features
+
+### 💻 EDORA Shell
+
+A custom command-line shell with a Linux-inspired interface.
 
 ```text
-EDORA_DRIVES/
+user@edora:C:\system$
 ```
 
-with three virtual drives:
+Root mode:
 
 ```text
-C:\    → System
-D:\    → Data / Games
-E:\    → Backup
+root@edora:C:\system#
 ```
 
-Example:
+---
+
+### 💾 Virtual Drives
+
+EDORA OS provides simulated drives:
 
 ```text
 C:\
-├── system\
-├── programs\
-│
 D:\
-├── games\
-├── data\
-│
 E:\
-└── backup\
-```
-
-The filesystem is backed by the host filesystem but is restricted to the EDORA virtual-drive environment.
-
----
-
-# 🖥️ EDO Shell
-
-The main interface is **EDO Shell v1.3**.
-
-```text
-+================================================+
-|                  EDORA OS                      |
-|               EDO SHELL v1.3                  |
-+================================================+
-| Virtual Operating System                       |
-| Virtual Filesystem : ONLINE                    |
-| EDO Security       : ACTIVE                    |
-| Network            : AVAILABLE                |
-+================================================+
-```
-
-Shell prompt:
-
-```text
-user@edora:C:\$
-```
-
-Root prompt:
-
-```text
-root@edora:C:\$
-```
-
----
-
-# 📂 Filesystem Commands
-
-EDORA includes a collection of filesystem commands.
-
-| Command              | Description             |
-| -------------------- | ----------------------- |
-| `dir`                | List directory contents |
-| `ls`                 | List directory contents |
-| `cd <folder>`        | Change directory        |
-| `cd ..`              | Go to parent directory  |
-| `cd \`               | Go to drive root        |
-| `mkdir <name>`       | Create directory        |
-| `touch <file>`       | Create file             |
-| `rm <name>`          | Delete file/folder      |
-| `cat <file>`         | Read file               |
-| `type <file>`        | Read file               |
-| `copy <src> <dst>`   | Copy files/folders      |
-| `move <src> <dst>`   | Move files/folders      |
-| `rename <old> <new>` | Rename                  |
-| `tree`               | Display directory tree  |
-| `find <name>`        | Search for files        |
-
-Example:
-
-```text
-C:\> mkdir projects
-Directory created.
-
-C:\> cd projects
-
-C:\projects> touch hello.txt
-File created.
-
-C:\projects> echo Hello EDORA > hello.txt
-```
-
----
-
-# 📝 Text Tools
-
-EDORA also contains basic text-processing commands.
-
-```text
-echo <text>
-grep <text> <file>
-head <file>
-tail <file>
-history
-```
-
-### Example
-
-```text
-C:\> echo Hello World
-Hello World
-
-C:\> history
-
-EDORA COMMAND HISTORY
----------------------
-   1  help
-   2  mkdir projects
-   3  cd projects
-   4  echo Hello World
-```
-
----
-
-# 🔢 BIN & HEX Tools
-
-EDORA contains experimental binary-file utilities.
-
-### BIN Editor
-
-```text
-bin <file>
-```
-
-### Read Binary
-
-```text
-binread <file>
-```
-
-### HEX Viewer
-
-```text
-binhex <file>
 ```
 
 Example:
 
 ```text
-HEX VIEW
-
-48 65 6c 6c 6f 20 45 44
-4f 52 41 00 01 02 03 04
+C:\system
+D:\games
+E:\backup
 ```
 
-These tools are intended for experimentation with file data and binary representations.
-
----
-
-# 🔐 EDO File Format
-
-EDORA includes its own experimental text encoding system called **EDO**.
-
-```text
-edo <file>
-edoread <file>
-edoraw <file>
-```
-
-The current implementation uses a simple **Caesar-style +2 character shift** for alphabetic characters.
-
-Example:
-
-```text
-Original:
-Hello EDORA
-
-EDO:
-Jgnnq GFQTC
-```
-
-Read the encrypted file:
-
-```text
-edoread file.edo
-```
-
-View the raw contents:
-
-```text
-edoraw file.edo
-```
-
-> ⚠️ EDO is an experimental encoding system, **not cryptographically secure encryption**.
-
----
-
-# ⏰ System Utilities
-
-EDORA provides several system-style commands.
-
-```text
-time
-date
-datetime
-clock
-calc
-sysinfo
-neofetch
-```
-
-### Calculator
-
-```text
-calc 10 + 20
-```
-
-Output:
-
-```text
-Result: 30
-```
-
-Supported operators:
-
-```text
-+
--
-*
-/
-```
-
----
-
-# 🌐 Network
-
-EDORA includes a real network ping command:
-
-```text
-ping <host>
-```
-
-Example:
-
-```text
-ping google.com
-```
-
-The command invokes the host operating system's `ping` utility.
-
-> EDORA itself does not implement a complete network stack.
-
----
-
-# 🎮 EDORA Games
-
-Because every operating system needs games. :)))
-
-```text
-game
-```
-
-Current game:
-
-```text
-┌──────────────────────────────┐
-│        EDORA GAMES            │
-├──────────────────────────────┤
-│ 1. Guess Number              │
-│ 2. Exit                      │
-└──────────────────────────────┘
-```
-
-### 🎯 Guess Number
-
-Guess a random number between:
-
-```text
-1 ──────────────── 100
-```
-
-The shell will tell you whether your guess should be higher or lower.
-
----
-
-# 👑 SUDO & ROOT
-
-EDORA includes a simple root-user simulation.
-
-```text
-sudo
-```
-
-Check root status:
-
-```text
-root
-```
-
-Normal user:
-
-```text
-user@edora:C:\$
-```
-
-Root user:
-
-```text
-root@edora:C:\$
-```
-
-Root access is used for protected EDORA operations such as the system-delete simulation.
-
-> ⚠️ This is an **application-level user simulation**, not real operating-system privilege escalation.
-
----
-
-# 💀 Kernel Panic
-
-EDORA even has its own fake kernel panic.
-
-```text
-panic
-```
-
-Output:
-
-```text
-+================================================+
-|                 KERNEL PANIC                   |
-+================================================+
-| EDORA Kernel encountered a fatal error.        |
-|                                                |
-| System halted.                                 |
-+================================================+
-```
-
-This is only a visual simulation and does **not** crash the host operating system.
-
----
-
-# 🗑️ System Delete Simulation
-
-EDORA includes a deliberately dramatic system deletion command:
-
-```text
-delete systemcl -t
-```
-
-However...
-
-```text
-[1/5] Checking system...
-[2/5] Checking dependencies...
-[3/5] Preparing deletion...
-[4/5] Simulation...
-[5/5] Cancelled for safety.
-
-EDORA OS remains intact.
-```
-
-💀
-
-It is intentionally implemented as a **simulation** rather than actually deleting the EDORA system.
-
----
-
-# 🔄 Reboot & Shutdown
-
-Restart the virtual environment:
-
-```text
-reboot
-```
-
-Shutdown EDORA:
-
-```text
-shutdown
-```
-
-The reboot process resets:
-
-```text
-Drive → C:
-User  → user
-Path  → C:\
-```
-
----
-
-# 📜 Complete Command List
-
-```text
-SYSTEM
-────────────────────────────────────
-
-help
-clear
-about
-whoami
-pwd
-drives
-
-FILESYSTEM
-────────────────────────────────────
-
-dir / ls
-cd <folder>
-cd ..
-cd \
-mkdir <name>
-touch <file>
-rm <name>
-cat <file>
-type <file>
-copy <src> <dst>
-move <src> <dst>
-rename <old> <new>
-tree
-find <name>
-
-TEXT
-────────────────────────────────────
-
-echo <text>
-grep <text> <file>
-head <file>
-tail <file>
-history
-
-EDITORS
-────────────────────────────────────
-
-bin <file>
-binread <file>
-binhex <file>
-edo <file>
-edoread <file>
-edoraw <file>
-
-UTILITIES
-────────────────────────────────────
-
-time
-date
-datetime
-clock
-calc <a> <op> <b>
-ping <host>
-neofetch
-sysinfo
-
-SECURITY
-────────────────────────────────────
-
-sudo
-root
-
-OTHER
-────────────────────────────────────
-
-game
-panic
-delete systemcl -t
-reboot
-shutdown
-exit
-```
-
----
-
-# 🏗️ Architecture
-
-The project is intentionally built without a large framework.
-
-```text
-                    EDORA OS
-                       │
-                 ┌─────┴─────┐
-                 │ EDO SHELL │
-                 └─────┬─────┘
-                       │
-       ┌───────────────┼────────────────┐
-       ▼               ▼                ▼
-  💾 Filesystem    🛠️ Utilities      🔐 Security
-       │               │                │
-   C: D: E:       calc / ping       sudo / root
-       │               │                │
-       └───────────────┼────────────────┘
-                       ▼
-                 🎮 Applications
-                       │
-                  Game / Editors
-```
-
----
-
-# 🛠️ Build
-
-## Requirements
-
-You need:
-
-* C++17-compatible compiler
-* `g++`
-* Standard C++ library
-* `std::filesystem` support
-
-### Linux / macOS
-
-```bash
-g++ main.cpp -std=c++17 -o edora
-```
-
-Run:
-
-```bash
-./edora
-```
-
-### Windows
-
-```bash
-g++ main.cpp -std=c++17 -o edora.exe
-```
-
-Run:
-
-```bash
-edora.exe
-```
-
----
-
-# 📁 Generated Files
-
-When EDORA OS starts for the first time, it creates:
+The virtual filesystem is stored inside:
 
 ```text
 EDORA_DRIVES/
 ```
 
+---
+
+### 🔐 Authentication System
+
+EDORA OS contains a persistent login system.
+
+Accounts are stored inside:
+
+```text
+C:\system\users.sys
+```
+
+Supported features:
+
+```text
+login
+logout
+passwd
+sudo
+root
+```
+
 Example:
+
+```text
+user@edora:C:\> sudo
+
+[sudo] password for user: ******
+Authentication successful.
+You are now root.
+
+root@edora:C:\#
+```
+
+---
+
+# 📦 Command List
+
+```text
+================ EDORA OS COMMANDS ================
+
+[BASIC]
+  help          Show available commands
+  clear         Clear screen
+  whoami        Show current user
+  pwd           Show current path
+
+[FILESYSTEM]
+  drives        Show available drives
+  ls            List directory
+  dir            List directory
+  cd             Change directory
+  mkdir         Create directory
+  touch         Create file
+  rm            Delete file/directory
+  cat            Read file
+
+[APPLICATIONS]
+  notepad       Text editor
+  bin           Binary editor
+  binread       Read binary file
+  binhex        Show hexadecimal
+  edo           EDO editor
+  edoread       Read EDO file
+  edoraw        Show raw EDO file
+  game          Start game
+
+[NETWORK]
+  ping          Network ping
+
+[SYSTEM]
+  neofetch      System information
+  sysinfo       Detailed system info
+  date          Current date
+  time          Current time
+
+[SECURITY]
+  sudo          Enter root mode
+  root          Show root status
+  passwd        Change password
+  logout        Logout user
+  panic         Kernel panic
+
+[POWER]
+  reboot        Restart EDORA OS
+  shutdown      Shutdown EDORA OS
+
+====================================================
+```
+
+---
+
+# 🧱 Project Architecture
+
+```text
+EDORA-OS/
+│
+├── main.cpp
+├── edora.h
+├── CMakeLists.txt
+│
+├── kernel/
+│   ├── kernel.cpp
+│   └── kernel.h
+│
+├── shell/
+│   ├── shell.cpp
+│   └── shell.h
+│
+├── filesystem/
+│   ├── filesystem.cpp
+│   └── filesystem.h
+│
+├── commands/
+│   ├── basic.cpp
+│   ├── basic.h
+│   ├── file.cpp
+│   ├── file.h
+│   ├── system.cpp
+│   ├── system.h
+│   ├── security.cpp
+│   └── security.h
+│
+├── apps/
+│   ├── notepad.cpp
+│   ├── notepad.h
+│   ├── binary.cpp
+│   ├── binary.h
+│   ├── edo.cpp
+│   ├── edo.h
+│   ├── game.cpp
+│   └── game.h
+│
+├── network/
+│   ├── ping.cpp
+│   └── ping.h
+│
+└── login/
+    ├── login.cpp
+    └── login.h
+```
+
+---
+
+# 🚀 Build
+
+### Requirements
+
+* C++17 compiler
+* CMake 3.16+
+* Windows
+* MinGW / GCC or another compatible compiler
+
+### Build
+
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+The executable will be generated inside the build directory.
+
+---
+
+# ▶️ Running EDORA OS
+
+After building:
+
+```bash
+EDORA-OS.exe
+```
+
+On the first launch, EDORA OS creates the virtual environment and asks you to create an account.
+
+Example:
+
+```text
+============================================
+              EDORA OS LOGIN
+============================================
+
+No account found.
+Create the first EDORA account.
+
+============================================
+              CREATE ACCOUNT
+============================================
+
+Username: louie
+Password: ******
+Confirm : ******
+
+[ OK ] Account created.
+```
+
+---
+
+# 🗂️ Virtual Filesystem
+
+EDORA OS creates its own isolated filesystem:
 
 ```text
 EDORA_DRIVES/
 │
 ├── C/
 │   ├── system/
+│   │   ├── kernel.sys
+│   │   ├── config.sys
+│   │   ├── users.sys
+│   │   ├── security.sys
+│   │   ├── services.sys
+│   │   ├── version.sys
+│   │   └── boot.log
+│   │
 │   └── programs/
 │
 ├── D/
@@ -617,190 +312,163 @@ EDORA_DRIVES/
     └── backup/
 ```
 
-This directory represents the virtual storage environment of EDORA OS.
+EDORA commands operate only inside this virtual environment.
 
 ---
 
-# 🧪 Project Status
+# 🛡️ Security
+
+EDORA OS has a simple privilege system:
 
 ```text
-EDORA OS v1.3
-
-████████████████████████████████ 100%
-
-Shell               [██████████] ONLINE
-Virtual Filesystem  [██████████] ONLINE
-File Manager        [██████████] ONLINE
-Text Tools          [██████████] ONLINE
-EDO Editor          [██████████] ONLINE
-HEX Viewer          [██████████] ONLINE
-Calculator          [██████████] ONLINE
-Network Ping        [██████████] ONLINE
-Games               [██████████] ONLINE
-Security Simulation  [██████████] ONLINE
+USER
+ │
+ └── sudo
+      │
+      ▼
+ROOT
 ```
 
-**Status: 🟢 Experimental / Functional**
-
----
-
-# ⚠️ Important Notes
-
-EDORA OS is **not a real bootable operating system**.
-
-It runs as a normal application on top of the host operating system.
-
-It does not currently provide:
-
-* ❌ A real kernel
-* ❌ Hardware drivers
-* ❌ Bootloader
-* ❌ Real process scheduler
-* ❌ Real memory management
-* ❌ Native hardware abstraction
-* ❌ Real OS-level user privileges
-
-Instead, it simulates these concepts where appropriate.
-
----
-
-# 🔒 Security Notes
-
-This project is primarily educational.
-
-Some components are intentionally simplified.
-
-For example:
+User mode:
 
 ```text
-sudo password
+user@edora:C:\$
 ```
 
-is currently implemented directly inside the source code, and the `ping` command delegates to the host shell.
-
-Therefore:
-
-> **Do not treat EDORA OS as a security boundary or production operating system.**
-
-The virtual filesystem is designed to restrict normal file operations to the EDORA drive environment, but this should not be considered a hardened sandbox.
-
----
-
-# 🗺️ Roadmap
-
-Future versions may introduce:
-
-* [ ] 🖥️ Graphical Desktop Environment
-* [ ] 🪟 Window Manager
-* [ ] 📁 Graphical File Manager
-* [ ] 📝 Improved Text Editor
-* [ ] 🧠 Better command parser
-* [ ] 🔐 Improved authentication
-* [ ] 💾 Virtual disk images
-* [ ] 📦 Package manager
-* [ ] 🧩 Plugin system
-* [ ] 🎮 More games
-* [ ] 🌐 More network utilities
-* [ ] 🖥️ Better terminal UI
-* [ ] ⚙️ Configuration system
-* [ ] 🧪 Automated testing
-
----
-
-# 🧠 Why I Built This
-
-EDORA OS started as an experiment to answer a simple question:
-
-> **"Can I build my own tiny operating system experience in C++?"**
-
-The result isn't Linux.
-
-It isn't Windows.
-
-It isn't Unix.
-
-It's **EDORA**.
+Root mode:
 
 ```text
-       C++
-        │
-        ▼
-    ┌─────────┐
-    │   EDO   │
-    │  SHELL  │
-    └────┬────┘
-         │
-    ┌────┴────┐
-    ▼         ▼
-  💾 FS     🛠️ TOOLS
-    │         │
-    └────┬────┘
-         ▼
-     🖥️ EDORA OS
+root@edora:C:\#
 ```
+
+Dangerous system operations are simulated rather than being allowed to destroy the host operating system.
 
 ---
 
-# 📸 Screenshots
+# ⚙️ System Information
 
-Add screenshots of the terminal here:
+Run:
 
 ```text
-assets/
-├── terminal.png
-├── neofetch.png
-├── filesystem.png
-└── panic.png
+neofetch
 ```
 
-Then embed them with:
+Example:
 
-```html
-<p align="center">
-  <img src="./assets/terminal.png" width="850" alt="EDORA OS Terminal">
-</p>
+```text
+       EDORA OS
+       -------------------------
+       OS       : EDORA OS
+       Version  : 1.0
+       Kernel   : 1.0
+       Shell    : 1.0
+       User     : louie
+       Drive    : C:
+       Path     : C:\system
+       Mode     : USER
 ```
 
 ---
 
-# 👨‍💻 Developer
+# 🎮 Built-in Applications
 
-<p align="center">
+EDORA OS also contains several small applications.
 
-## Xiao Louie — EDORA STUDIO
+### 📝 Notepad
+
+```text
+notepad
+```
+
+Create and save real files inside the EDORA virtual filesystem.
+
+### 🔢 Binary Editor
+
+```text
+bin
+binread
+binhex
+```
+
+### 🧩 EDO Editor
+
+```text
+edo
+edoread
+edoraw
+```
+
+### 🎮 Game
+
+```text
+game
+```
+
+---
+
+# 🧠 Technologies
+
+EDORA OS is built with:
+
+<div align="center">
+
+![C++](https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge\&logo=cplusplus\&logoColor=white)
+![CMake](https://img.shields.io/badge/CMake-Build-064F8C?style=for-the-badge\&logo=cmake\&logoColor=white)
+![Filesystem](https://img.shields.io/badge/std%3A%3Afilesystem-Virtual%20FS-444444?style=for-the-badge)
+![Windows](https://img.shields.io/badge/Windows-Supported-0078D6?style=for-the-badge\&logo=windows\&logoColor=white)
+
+</div>
+
+---
+
+# 📌 Development Status
+
+**EDORA OS v1.0** is currently considered the first stable release of the project.
+
+Development is currently **paused**.
+
+The project may return in a future version with more advanced features such as:
+
+```text
+EDORA OS 2.0
+├── Desktop GUI
+├── Window manager
+├── Better filesystem
+├── Process manager
+├── More applications
+├── Improved security
+└── More system utilities
+```
+
+---
+
+# 📜 Version
+
+```text
+EDORA OS       : 1.0
+EDORA Kernel   : 1.0
+EDORA Shell    : 1.0
+```
+
+---
+
+# ❤️ Credits
+
+<div align="center">
+
+### MADE BY XIAO LOUIE
+
+**A 12-year-old programmer**
 
 💻 C++ Developer
-🖥️ OS Experimenter
 🐧 Linux Enthusiast
-🧪 Builder of questionable software
+⚙️ EDORA OS Creator
+🚀 EDORA STUDIO
 
-</p>
+<br>
 
----
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0072ff,100:00c6ff&height=120&section=footer&animation=fadeIn" width="100%"/>
 
-# ⭐ Support
+**EDORA OS — Build. Learn. Create.**
 
-If you think EDORA OS is interesting:
-
-⭐ **Star the repository**
-
-🐛 Find bugs
-💡 Suggest ideas
-🔧 Improve the code
-🚀 Build something with it
-
----
-
-<p align="center">
-
-# 🖥️ EDORA OS
-
-### `user@edora:C:\$`
-
-**Think. Build. Break. Rebuild.**
-
-</p>
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0072ff,50:00c6ff,100:050505&height=120&section=footer"/>
-</p>
+</div>

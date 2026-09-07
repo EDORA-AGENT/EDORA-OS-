@@ -146,7 +146,7 @@ void game();
 //                    NETWORK
 // ======================================================
 
-void commandPing();
+void commandPing(const std::string& host = "");
 
 // ======================================================
 //                    SECURITY

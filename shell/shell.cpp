@@ -171,10 +171,7 @@ void executeCommand(const string& input)
 
     else if (command == "ping")
     {
-        if (!argument.empty())
-            commandPing(argument);
-        else
-            commandPing();
+        commandPing(argument);
     }
 
 

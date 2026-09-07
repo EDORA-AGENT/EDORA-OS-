@@ -3,6 +3,6 @@
 
 #include <string>
 
-void commandPing(const std::string& host = "");
+void commandPing(const std::string& host);
 
 #endif
