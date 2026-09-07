@@ -459,7 +459,7 @@ EDORA Shell    : 1.0
 
 ### MADE BY XIAO LOUIE
 
-**A 12-year-old programmer**
+**A 13-year-old programmer**
 
 💻 C++ Developer
 🐧 Linux Enthusiast
