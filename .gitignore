@@ -23,7 +23,7 @@ compile_commands.json
 
 # Visual Studio Code
 .vscode/
-
+qemu/
 # EDORA virtual drives
 EDORA_DRIVES/
 
@@ -31,7 +31,7 @@ EDORA_DRIVES/
 *.tmp
 *.temp
 *.log
-
+qemu-debug.log/
 # OS files
 .DS_Store
 Thumbs.db
