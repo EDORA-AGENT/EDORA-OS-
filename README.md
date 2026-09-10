@@ -524,3 +524,18 @@ Interactive Shell
 ### MADE BY XIAO LOUIE
 
 **A young programmer building EDORA OS from scratch.** ❤️
+
+**A 13-year-old programmer**
+
+💻 C++ Developer
+🐧 Linux Enthusiast
+⚙️ EDORA OS Creator
+🚀 EDORA STUDIO
+
+<br>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0072ff,100:00c6ff&height=120&section=footer&animation=fadeIn" width="100%"/>
+
+**EDORA OS — Build. Learn. Create.**
+
+</div>
