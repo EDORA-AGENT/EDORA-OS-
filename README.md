@@ -1,475 +1,526 @@
-<div align="center">
+# 🖥️ EDORA OS
 
-<a href="https://github.com/EDORA-AGENT/EDORA-OS-">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=28&duration=3000&pause=800&color=00C8FF&center=true&vCenter=true&width=700&lines=Welcome+to+EDORA+OS;A+Custom+OS+Simulator;Built+with+C%2B%2B;EDORA+OS+v1.0" alt="Typing SVG" />
-</a>
+<p align="center">
 
-<br>
+<img src="https://img.shields.io/badge/EDORA%20OS-2.3-black?style=for-the-badge&logo=linux" alt="EDORA OS">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00c6ff,100:0072ff&height=180&section=header&text=EDORA%20OS&fontSize=55&fontColor=ffffff&animation=fadeIn&fontAlignY=35" width="100%"/>
+<img src="https://img.shields.io/badge/Architecture-x86-blue?style=for-the-badge" alt="Architecture">
 
+<img src="https://img.shields.io/badge/Boot-BIOS-green?style=for-the-badge" alt="Boot">
 
-### ⚡ A lightweight operating system simulator written in C++
+<img src="https://img.shields.io/badge/Language-C%2B%2B-orange?style=for-the-badge&logo=c%2B%2B" alt="C++">
 
-[![Version](https://img.shields.io/badge/EDORA%20OS-v1.0-00c6ff?style=for-the-badge)](https://github.com/EDORA-AGENT/EDORA-OS-)
-[![Language](https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge\&logo=cplusplus\&logoColor=white)](https://isocpp.org/)
-[![Build](https://img.shields.io/badge/Build-CMake-064F8C?style=for-the-badge\&logo=cmake\&logoColor=white)](https://cmake.org/)
-[![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?style=for-the-badge\&logo=windows\&logoColor=white)](https://www.microsoft.com/windows)
-[![Status](https://img.shields.io/badge/Status-Development%20Paused-yellow?style=for-the-badge)](#-development-status)
+<img src="https://img.shields.io/badge/Status-Experimental-purple?style=for-the-badge" alt="Status">
 
-</div>
+</p>
 
----
+<p align="center">
 
-# 🖥️ What is EDORA OS?
+**A small real x86 operating system built from scratch.**
 
-**EDORA OS** is a custom operating system simulator written in **C++**.
-
-It is designed to simulate the experience of using a real operating system while remaining completely safe inside its own virtual filesystem.
-
-EDORA OS includes:
-
-* 🖥️ Custom shell
-* 💾 Virtual drives
-* 📁 Virtual filesystem
-* 🔐 User authentication
-* 👑 Root / sudo system
-* 📝 Text editor
-* 🔢 Binary editor
-* 🧩 EDO file system
-* 🌐 Network ping
-* 🎮 Built-in game
-* ⚙️ Kernel simulation
-* 📊 System information
-* 🔄 Reboot & shutdown simulation
-
-> **EDORA OS does not modify your real Windows filesystem.**
+</p>
 
 ---
 
-# ✨ Features
+## 🚀 About
 
-### 💻 EDORA Shell
+**EDORA OS** is a personal experimental operating system project created by **XIAO LOUIE**.
 
-A custom command-line shell with a Linux-inspired interface.
+The project started as a simple C++ OS simulator and is now being developed into a **real BIOS-bootable x86 operating system**.
+
+EDORA OS currently boots through:
 
 ```text
-user@edora:C:\system$
+BIOS
+ ↓
+EDORA Bootloader
+ ↓
+Kernel loaded from disk
+ ↓
+A20
+ ↓
+GDT
+ ↓
+Protected Mode
+ ↓
+EDORA Kernel
+ ↓
+VGA Terminal
+ ↓
+PS/2 Keyboard
+ ↓
+Shell
 ```
 
-Root mode:
+The goal is not to create another Linux distribution.
+
+The goal is to **learn how an operating system works from the lowest level upward.**
+
+---
+
+## ✨ Current Features
+
+### 🥾 Bootloader
+
+* BIOS bootable
+* 512-byte boot sector
+* BIOS INT 13h disk access
+* LBA disk loading
+* Kernel loading at `0x10000`
+* A20 line enabled
+* GDT initialization
+* Protected Mode transition
+
+### 🧠 Kernel
+
+* Freestanding C++
+* x86 / i386 architecture
+* Custom kernel entry point
+* Custom linker script
+* Kernel stack
+* Protected Mode execution
+
+### ⌨️ Keyboard
+
+* PS/2 keyboard driver
+* Polling input
+* Letters
+* Numbers
+* Symbols
+* Shift
+* Caps Lock
+* Backspace
+* Enter
+* Tab
+
+### 🖥️ VGA Terminal
+
+* VGA text mode
+* `80 × 25`
+* Hardware cursor
+* Colored text
+* Header
+* Footer
+* Terminal box
+* Scrolling
+* Command prompt
+
+Example:
 
 ```text
-root@edora:C:\system#
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ EDORA TERMINAL 3.1                                             EDORA OS      │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  EDORA OS                                                                    │
+│  Real x86 Operating System                                                   │
+│                                                                              │
+│  [ OK ] Kernel online                                                        │
+│  [ OK ] VGA terminal initialized                                             │
+│  [ OK ] PS/2 keyboard ready                                                  │
+│                                                                              │
+│  Type 'help' to see available commands.                                      │
+│                                                                              │
+│  EDORA:\> _                                                                 │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-### 💾 Virtual Drives
+## 💻 Shell
 
-EDORA OS provides simulated drives:
+Current shell commands:
 
 ```text
-C:\
-D:\
-E:\
+help
+clear
+about
+echo
 ```
 
 Example:
 
 ```text
-C:\system
-D:\games
-E:\backup
-```
+EDORA:\> about
 
-The virtual filesystem is stored inside:
-
-```text
-EDORA_DRIVES/
-```
-
----
-
-### 🔐 Authentication System
-
-EDORA OS contains a persistent login system.
-
-Accounts are stored inside:
-
-```text
-C:\system\users.sys
-```
-
-Supported features:
-
-```text
-login
-logout
-passwd
-sudo
-root
-```
-
-Example:
-
-```text
-user@edora:C:\> sudo
-
-[sudo] password for user: ******
-Authentication successful.
-You are now root.
-
-root@edora:C:\#
+EDORA OS 2.3
+------------------------------
+Real x86 Operating System
+Architecture : i386
+Boot         : BIOS
+CPU Mode     : Protected Mode
+Keyboard     : PS/2
+Display      : VGA 80x25
+Terminal     : EDORA VGA 3.1
+Made by      : XIAO LOUIE
 ```
 
 ---
 
-# 📦 Command List
+## 🏗️ Project Structure
 
 ```text
-================ EDORA OS COMMANDS ================
-
-[BASIC]
-  help          Show available commands
-  clear         Clear screen
-  whoami        Show current user
-  pwd           Show current path
-
-[FILESYSTEM]
-  drives        Show available drives
-  ls            List directory
-  dir            List directory
-  cd             Change directory
-  mkdir         Create directory
-  touch         Create file
-  rm            Delete file/directory
-  cat            Read file
-
-[APPLICATIONS]
-  notepad       Text editor
-  bin           Binary editor
-  binread       Read binary file
-  binhex        Show hexadecimal
-  edo           EDO editor
-  edoread       Read EDO file
-  edoraw        Show raw EDO file
-  game          Start game
-
-[NETWORK]
-  ping          Network ping
-
-[SYSTEM]
-  neofetch      System information
-  sysinfo       Detailed system info
-  date          Current date
-  time          Current time
-
-[SECURITY]
-  sudo          Enter root mode
-  root          Show root status
-  passwd        Change password
-  logout        Logout user
-  panic         Kernel panic
-
-[POWER]
-  reboot        Restart EDORA OS
-  shutdown      Shutdown EDORA OS
-
-====================================================
-```
-
----
-
-# 🧱 Project Architecture
-
-```text
-EDORA-OS/
+EDORA-OS-/
+│
+├── boot/
+│   └── boot.asm
+│
+├── kernel/
+│   ├── kernel.cpp
+│   ├── kernel.h
+│   │
+│   └── real/
+│       ├── kernel_main.cpp
+│       ├── kernel_main.h
+│       ├── kernel_entry.asm
+│       ├── linker.ld
+│       │
+│       └── drivers/
+│           ├── keyboard.cpp
+│           ├── keyboard.h
+│           ├── vga.cpp
+│           └── vga.h
+│
+├── shell/
+│
+├── filesystem/
+│
+├── commands/
+│
+├── apps/
+│
+├── network/
+│
+├── login/
 │
 ├── main.cpp
 ├── edora.h
 ├── CMakeLists.txt
-│
-├── kernel/
-│   ├── kernel.cpp
-│   └── kernel.h
-│
-├── shell/
-│   ├── shell.cpp
-│   └── shell.h
-│
-├── filesystem/
-│   ├── filesystem.cpp
-│   └── filesystem.h
-│
-├── commands/
-│   ├── basic.cpp
-│   ├── basic.h
-│   ├── file.cpp
-│   ├── file.h
-│   ├── system.cpp
-│   ├── system.h
-│   ├── security.cpp
-│   └── security.h
-│
-├── apps/
-│   ├── notepad.cpp
-│   ├── notepad.h
-│   ├── binary.cpp
-│   ├── binary.h
-│   ├── edo.cpp
-│   ├── edo.h
-│   ├── game.cpp
-│   └── game.h
-│
-├── network/
-│   ├── ping.cpp
-│   └── ping.h
-│
-└── login/
-    ├── login.cpp
-    └── login.h
+└── README.md
+```
+
+The original simulator is kept alongside the real OS development so the project can evolve without losing the earlier work.
+
+---
+
+## 🛠️ Toolchain
+
+EDORA OS is currently developed and tested with:
+
+| Tool                   | Purpose          |
+| ---------------------- | ---------------- |
+| NASM                   | Assembly         |
+| Clang                  | Freestanding C++ |
+| LLD                    | ELF/i386 linking |
+| QEMU                   | Virtual machine  |
+| PowerShell             | Build workflow   |
+| VS Code / Code::Blocks | Development      |
+
+---
+
+## 🔨 Build
+
+### 1. Assemble the bootloader
+
+```powershell
+nasm -f bin boot\boot.asm -o build\boot.bin
+```
+
+### 2. Assemble kernel entry
+
+```powershell
+nasm -f elf32 kernel\real\kernel_entry.asm -o build\kernel_entry.o
+```
+
+### 3. Compile keyboard driver
+
+```powershell
+clang++ --target=i386-unknown-elf -ffreestanding -fno-exceptions -fno-rtti -fno-stack-protector -nostdinc++ -c kernel\real\drivers\keyboard.cpp -o build\keyboard.o
+```
+
+### 4. Compile VGA driver
+
+```powershell
+clang++ --target=i386-unknown-elf -ffreestanding -fno-exceptions -fno-rtti -fno-stack-protector -nostdinc++ -c kernel\real\drivers\vga.cpp -o build\vga.o
+```
+
+### 5. Compile kernel
+
+```powershell
+clang++ --target=i386-unknown-elf -ffreestanding -fno-exceptions -fno-rtti -fno-stack-protector -nostdinc++ -c kernel\real\kernel_main.cpp -o build\kernel_main.o
+```
+
+### 6. Link kernel
+
+```powershell
+ld.lld -m elf_i386 -T kernel\real\linker.ld --oformat binary -o build\kernel.bin build\kernel_entry.o build\kernel_main.o build\keyboard.o build\vga.o
 ```
 
 ---
 
-# 🚀 Build
+## 💿 Create Disk Image
 
-### Requirements
+Combine the bootloader and kernel:
 
-* C++17 compiler
-* CMake 3.16+
-* Windows
-* MinGW / GCC or another compatible compiler
+```powershell
+Remove-Item build\edora.img -ErrorAction SilentlyContinue
 
-### Build
-
-```bash
-cmake -S . -B build
-cmake --build build
+cmd /c copy /b build\boot.bin+build\kernel.bin build\edora.img
 ```
 
-The executable will be generated inside the build directory.
+Pad the image to complete sectors:
 
----
+```powershell
+$img = [System.IO.File]::ReadAllBytes("build\edora.img")
+$size = [Math]::Ceiling($img.Length / 512) * 512
 
-# ▶️ Running EDORA OS
+$img2 = New-Object byte[] $size
 
-After building:
+[Array]::Copy($img, $img2, $img.Length)
 
-```bash
-EDORA-OS.exe
-```
-
-On the first launch, EDORA OS creates the virtual environment and asks you to create an account.
-
-Example:
-
-```text
-============================================
-              EDORA OS LOGIN
-============================================
-
-No account found.
-Create the first EDORA account.
-
-============================================
-              CREATE ACCOUNT
-============================================
-
-Username: louie
-Password: ******
-Confirm : ******
-
-[ OK ] Account created.
+[System.IO.File]::WriteAllBytes(
+    "build\edora.img",
+    $img2
+)
 ```
 
 ---
 
-# 🗂️ Virtual Filesystem
+## 🧪 Run with QEMU
 
-EDORA OS creates its own isolated filesystem:
-
-```text
-EDORA_DRIVES/
-│
-├── C/
-│   ├── system/
-│   │   ├── kernel.sys
-│   │   ├── config.sys
-│   │   ├── users.sys
-│   │   ├── security.sys
-│   │   ├── services.sys
-│   │   ├── version.sys
-│   │   └── boot.log
-│   │
-│   └── programs/
-│
-├── D/
-│   ├── games/
-│   └── data/
-│
-└── E/
-    └── backup/
+```powershell
+& ".\qemu\qemu-system-x86_64.exe" `
+    -drive format=raw,file=build\edora.img `
+    -boot c
 ```
 
-EDORA commands operate only inside this virtual environment.
+EDORA OS should boot directly from the virtual disk.
 
 ---
 
-# 🛡️ Security
-
-EDORA OS has a simple privilege system:
+## 🧬 Boot Architecture
 
 ```text
-USER
- │
- └── sudo
-      │
-      ▼
-ROOT
-```
-
-User mode:
-
-```text
-user@edora:C:\$
-```
-
-Root mode:
-
-```text
-root@edora:C:\#
-```
-
-Dangerous system operations are simulated rather than being allowed to destroy the host operating system.
-
----
-
-# ⚙️ System Information
-
-Run:
-
-```text
-neofetch
-```
-
-Example:
-
-```text
-       EDORA OS
-       -------------------------
-       OS       : EDORA OS
-       Version  : 1.0
-       Kernel   : 1.0
-       Shell    : 1.0
-       User     : louie
-       Drive    : C:
-       Path     : C:\system
-       Mode     : USER
+                 ┌──────────────────┐
+                 │      BIOS        │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │ EDORA Bootloader │
+                 │    512 bytes     │
+                 └────────┬─────────┘
+                          │
+                    INT 13h / LBA
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │   EDORA Kernel   │
+                 │     0x10000      │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                    Enable A20
+                          │
+                          ▼
+                    Load GDT
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │ Protected Mode   │
+                 └────────┬─────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │   Kernel Main    │
+                 └────────┬─────────┘
+                          │
+             ┌────────────┴────────────┐
+             ▼                         ▼
+      ┌─────────────┐           ┌─────────────┐
+      │ VGA Driver  │           │ PS/2 Driver │
+      └──────┬──────┘           └──────┬──────┘
+             │                         │
+             └────────────┬────────────┘
+                          ▼
+                   EDORA TERMINAL
 ```
 
 ---
 
-# 🎮 Built-in Applications
+## 🗺️ Roadmap
 
-EDORA OS also contains several small applications.
+### EDORA OS 2.x
 
-### 📝 Notepad
+* [x] BIOS bootloader
+* [x] Kernel loading
+* [x] A20
+* [x] GDT
+* [x] Protected Mode
+* [x] Real x86 kernel
+* [x] PS/2 keyboard
+* [x] VGA terminal
+* [x] Hardware cursor
+* [x] Basic shell
+* [ ] `history`
+* [ ] `reboot`
+* [ ] Better command parser
+
+### EDORA OS 2.4
+
+**RAM Filesystem**
 
 ```text
-notepad
+dir
+cd
+pwd
+mkdir
+touch
+cat
+rm
 ```
 
-Create and save real files inside the EDORA virtual filesystem.
+### EDORA OS 2.5
 
-### 🔢 Binary Editor
+* Calculator
+* System time
+* Basic system information
+* More shell utilities
+
+### EDORA OS 2.6
+
+**Interrupt System**
+
+* IDT
+* PIC
+* IRQ
+* Keyboard interrupts
+* Timer interrupts
+
+### EDORA OS 2.7
+
+**Memory Management**
+
+* Physical memory manager
+* Heap
+* Kernel allocator
+
+### EDORA OS 3.0
+
+**Applications**
+
+* Games
+* Text applications
+* System utilities
+
+### EDORA OS 3.5
+
+**Graphics**
+
+* Mouse
+* Framebuffer
+* Graphics primitives
+
+### EDORA OS 4.0
+
+**Desktop**
 
 ```text
-bin
-binread
-binhex
-```
-
-### 🧩 EDO Editor
-
-```text
-edo
-edoread
-edoraw
-```
-
-### 🎮 Game
-
-```text
-game
+┌─────────────────────────────────────────────┐
+│ EDORA OS                         12:42      │
+├─────────────────────────────────────────────┤
+│                                             │
+│      🗂 Files      ⚙ Settings      💻 Shell │
+│                                             │
+│                                             │
+├─────────────────────────────────────────────┤
+│ EDORA OS                                    │
+└─────────────────────────────────────────────┘
 ```
 
 ---
 
-# 🧠 Technologies
+## 🎯 Project Philosophy
 
-EDORA OS is built with:
+EDORA OS is mainly a **learning and experimentation project**.
 
-<div align="center">
+Instead of relying on an existing operating-system framework, the project explores the fundamentals:
 
-![C++](https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge\&logo=cplusplus\&logoColor=white)
-![CMake](https://img.shields.io/badge/CMake-Build-064F8C?style=for-the-badge\&logo=cmake\&logoColor=white)
-![Filesystem](https://img.shields.io/badge/std%3A%3Afilesystem-Virtual%20FS-444444?style=for-the-badge)
-![Windows](https://img.shields.io/badge/Windows-Supported-0078D6?style=for-the-badge\&logo=windows\&logoColor=white)
+```text
+Boot
+ ↓
+CPU modes
+ ↓
+Memory
+ ↓
+Interrupts
+ ↓
+Drivers
+ ↓
+Filesystem
+ ↓
+Processes
+ ↓
+Applications
+ ↓
+Desktop
+```
 
-</div>
+Every subsystem is built step-by-step.
 
 ---
 
-# 📌 Development Status
+## 👨‍💻 Creator
 
-**EDORA OS v1.0** is currently considered the first stable release of the project.
+**XIAO LOUIE**
 
-Development is currently **paused**.
+Cyber Security • C/C++ Developer • Creator
 
-The project may return in a future version with more advanced features such as:
+EDORA Studio / EDORA-AGENT
+
+> Building things from zero, one layer at a time.
+
+---
+
+## ⭐ Support
+
+If you find the project interesting, consider giving the repository a ⭐ on GitHub.
+
+It helps motivate further development of EDORA OS.
+
+---
+
+## 📜 License
+
+EDORA OS is an experimental personal project.
+
+See the repository license for the applicable terms.
+
+---
+
+## ⚡ Status
+
+> 🟢 **EDORA OS is currently booting successfully on x86 through BIOS/QEMU.**
+
+Current milestone:
 
 ```text
-EDORA OS 2.0
-├── Desktop GUI
-├── Window manager
-├── Better filesystem
-├── Process manager
-├── More applications
-├── Improved security
-└── More system utilities
+EDORA OS 2.3
+        ↓
+Real x86 Kernel
+        ↓
+Protected Mode
+        ↓
+VGA Terminal 3.1
+        ↓
+PS/2 Keyboard
+        ↓
+Interactive Shell
 ```
 
 ---
-
-# 📜 Version
-
-```text
-EDORA OS       : 1.0
-EDORA Kernel   : 1.0
-EDORA Shell    : 1.0
-```
-
----
-
-# ❤️ Credits
-
-<div align="center">
 
 ### MADE BY XIAO LOUIE
 
-**A 12-year-old programmer**
-
-💻 C++ Developer
-🐧 Linux Enthusiast
-⚙️ EDORA OS Creator
-🚀 EDORA STUDIO
-
-<br>
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0072ff,100:00c6ff&height=120&section=footer&animation=fadeIn" width="100%"/>
-
-**EDORA OS — Build. Learn. Create.**
-
-</div>
+**A young programmer building EDORA OS from scratch.** ❤️
