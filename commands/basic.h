@@ -5,5 +5,7 @@ void commandHelp();
 void commandClear();
 void commandWhoami();
 void commandPwd();
+void commandStatus();
+void commandDrivers();
 
 #endif

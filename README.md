@@ -4,7 +4,7 @@
 
 <img src="https://img.shields.io/badge/EDORA%20OS-2.3-black?style=for-the-badge&logo=linux" alt="EDORA OS">
 
-<img src="https://img.shields.io/badge/Architecture-x86-blue?style=for-the-badge" alt="Architecture">
+<img src="https://img.shields.io/badge/Architecture-i386%20%2B%20x86__64-blue?style=for-the-badge" alt="Architecture">
 
 <img src="https://img.shields.io/badge/Boot-BIOS-green?style=for-the-badge" alt="Boot">
 
@@ -52,6 +52,13 @@ PS/2 Keyboard
 Shell
 ```
 
+### Current status
+
+The stable, fully tested target is the 32-bit BIOS/USB build. An x86_64
+experimental branch is also available with a four-level page table, NXE and
+serial boot diagnostics, but it is **not production-ready** and should not be
+used as the main USB installation yet.
+
 The goal is not to create another Linux distribution.
 
 The goal is to **learn how an operating system works from the lowest level upward.**
@@ -70,6 +77,20 @@ The goal is to **learn how an operating system works from the lowest level upwar
 * A20 line enabled
 * GDT initialization
 * Protected Mode transition
+* 32-bit kernel load limit: 64 sectors
+
+### 🧪 x86_64 experimental boot
+
+* Real-mode to protected-mode to long-mode transition
+* PML4 -> PDPT -> PD -> PT identity mapping
+* `EFER.NXE` validation and activation
+* NX pages for stack and VGA memory
+* Specific boot failure messages for disk, CPU and NX support
+* Serial diagnostics for QEMU
+
+The 64-bit kernel currently stops after boot diagnostics. Authentication,
+filesystem, networking, scheduler and user applications remain in the 32-bit
+kernel and have not yet been ported to x86_64.
 
 ### 🧠 Kernel
 
@@ -164,23 +185,35 @@ Made by      : XIAO LOUIE
 EDORA-OS-/
 │
 ├── boot/
-│   └── boot.asm
+│   ├── 32/
+│   │   └── boot.asm
+│   └── 64/
+│       └── boot64.asm
 │
 ├── kernel/
 │   ├── kernel.cpp
 │   ├── kernel.h
 │   │
-│   └── real/
-│       ├── kernel_main.cpp
-│       ├── kernel_main.h
+│   ├── real32/
+│   │   ├── kernel_main.cpp
+│   │   ├── kernel_entry.asm
+│   │   ├── linker.ld
+│   │   ├── core/
+│   │   │   ├── paging.cpp
+│   │   │   ├── exceptions.cpp
+│   │   │   ├── filesystem.cpp
+│   │   │   └── process.cpp
+│   │   └── drivers/
+│   │       ├── keyboard.cpp
+│   │       ├── ata.cpp
+│   │       ├── timer.cpp
+│   │       ├── rtl8139.cpp
+│   │       └── vga.cpp
+│
+│   └── real64/
 │       ├── kernel_entry.asm
-│       ├── linker.ld
-│       │
-│       └── drivers/
-│           ├── keyboard.cpp
-│           ├── keyboard.h
-│           ├── vga.cpp
-│           └── vga.h
+│       ├── kernel_main.cpp
+│       └── linker.ld
 │
 ├── shell/
 │
@@ -221,40 +254,102 @@ EDORA OS is currently developed and tested with:
 
 ## 🔨 Build
 
+The Makefile is the recommended build entry point.
+
+### Stable 32-bit build
+
+```powershell
+mingw32-make clean
+mingw32-make
+mingw32-make run
+```
+
+The output is:
+
+```text
+build/edora.img
+```
+
+### USB RAMFS image
+
+The kernel RAMFS is embedded in the image and loaded into memory at boot. No
+hard disk is required after boot.
+
+```powershell
+mingw32-make usb
+mingw32-make run-usb
+```
+
+The raw USB image is:
+
+```text
+build/edora-usb.img
+```
+
+Write this image in raw/DD mode with Rufus or a similar tool. The current USB
+boot path is BIOS/Legacy or CSM; UEFI-only systems are not supported by this
+image yet.
+
+### Experimental 64-bit build
+
+```powershell
+mingw32-make x64
+mingw32-make run64
+```
+
+Output:
+
+```text
+build64/edora64.img
+```
+
+This target is for QEMU validation only. It is explicitly **not ready for
+real hardware or production USB boot**. The serial output should reach:
+
+```text
+EDORA64: kernel entry
+EDORA64: EFER.NXE enabled
+EDORA64: 4-level paging active
+EDORA64: boot completed
+```
+
+The `BOOTX64.EFI` file is currently a UEFI diagnostic application and does
+not yet hand off to the 32-bit kernel.
+
 ### 1. Assemble the bootloader
 
 ```powershell
-nasm -f bin boot\boot.asm -o build\boot.bin
+nasm -f bin boot\32\boot.asm -o build\boot.bin
 ```
 
 ### 2. Assemble kernel entry
 
 ```powershell
-nasm -f elf32 kernel\real\kernel_entry.asm -o build\kernel_entry.o
+nasm -f elf32 kernel\real32\kernel_entry.asm -o build\kernel_entry.o
 ```
 
 ### 3. Compile keyboard driver
 
 ```powershell
-clang++ --target=i386-unknown-elf -ffreestanding -fno-exceptions -fno-rtti -fno-stack-protector -nostdinc++ -c kernel\real\drivers\keyboard.cpp -o build\keyboard.o
+clang++ --target=i386-unknown-elf -ffreestanding -fno-exceptions -fno-rtti -fno-stack-protector -nostdinc++ -c kernel\real32\drivers\keyboard.cpp -o build\keyboard.o
 ```
 
 ### 4. Compile VGA driver
 
 ```powershell
-clang++ --target=i386-unknown-elf -ffreestanding -fno-exceptions -fno-rtti -fno-stack-protector -nostdinc++ -c kernel\real\drivers\vga.cpp -o build\vga.o
+clang++ --target=i386-unknown-elf -ffreestanding -fno-exceptions -fno-rtti -fno-stack-protector -nostdinc++ -c kernel\real32\drivers\vga.cpp -o build\vga.o
 ```
 
 ### 5. Compile kernel
 
 ```powershell
-clang++ --target=i386-unknown-elf -ffreestanding -fno-exceptions -fno-rtti -fno-stack-protector -nostdinc++ -c kernel\real\kernel_main.cpp -o build\kernel_main.o
+clang++ --target=i386-unknown-elf -ffreestanding -fno-exceptions -fno-rtti -fno-stack-protector -nostdinc++ -c kernel\real32\kernel_main.cpp -o build\kernel_main.o
 ```
 
 ### 6. Link kernel
 
 ```powershell
-ld.lld -m elf_i386 -T kernel\real\linker.ld --oformat binary -o build\kernel.bin build\kernel_entry.o build\kernel_main.o build\keyboard.o build\vga.o
+ld.lld -m elf_i386 -T kernel\real32\linker.ld --oformat binary -o build\kernel.bin build\kernel_entry.o build\kernel_main.o build\keyboard.o build\vga.o
 ```
 
 ---

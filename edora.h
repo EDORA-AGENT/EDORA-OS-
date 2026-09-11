@@ -1,15 +1,17 @@
 #ifndef EDORA_H
 #define EDORA_H
 
-#include <iostream>
-#include <fstream>
-#include <filesystem>
-#include <string>
-#include <vector>
-#include <iomanip>
+#include <chrono>
 #include <cstdlib>
 #include <ctime>
-#include <chrono>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <map>
+#include <optional>
+#include <string>
+#include <vector>
 
 namespace fs = std::filesystem;
 using namespace std;
@@ -20,28 +22,20 @@ using namespace std;
 
 extern bool running;
 extern bool isRoot;
-
-extern string username;
-
-extern fs::path edoraRoot;
-extern fs::path currentPath;
-
-extern char currentDrive;
-extern bool running;
-extern bool isRoot;
 extern string username;
 extern string password;
+
 extern fs::path edoraRoot;
 extern fs::path currentPath;
 extern char currentDrive;
+
 // ======================================================
 //                    SYSTEM CONSTANTS
 // ======================================================
 
-const string EDORA_VERSION = "1.0";
-const string KERNEL_VERSION = "1.0";
-const string SHELL_VERSION = "1.0";
-
+const string EDORA_VERSION = "2.1";
+const string KERNEL_VERSION = "2.1";
+const string SHELL_VERSION = "2.1";
 const string ROOT_PASSWORD = "1234";
 
 // ======================================================
@@ -49,9 +43,7 @@ const string ROOT_PASSWORD = "1234";
 // ======================================================
 
 fs::path drivePath(char drive);
-
 string getPath();
-
 bool insideDrive(fs::path path);
 
 // ======================================================
@@ -59,13 +51,9 @@ bool insideDrive(fs::path path);
 // ======================================================
 
 void kernelInit();
-
 void kernelShutdown();
-
 void kernelPanic();
-
 void rebootSystem();
-
 void shutdownSystem();
 
 // ======================================================
@@ -73,11 +61,8 @@ void shutdownSystem();
 // ======================================================
 
 void shellStart();
-
 void shellLoop();
-
 void showPrompt();
-
 void executeCommand(const string& command);
 
 // ======================================================
@@ -85,19 +70,14 @@ void executeCommand(const string& command);
 // ======================================================
 
 void commandHelp();
-
 void commandClear();
-
 void commandWhoami();
-
 void commandPwd();
-
+void commandStatus();
+void commandDrivers();
 void commandNeofetch();
-
 void commandSysinfo();
-
 void commandDate();
-
 void commandTime();
 
 // ======================================================
@@ -105,57 +85,49 @@ void commandTime();
 // ======================================================
 
 void filesystemInit();
-
 void commandDrives();
-
 void commandLs();
-
 void commandCd();
-
 void commandMkdir();
-
 void commandTouch();
-
 void commandRm();
-
 void commandCat();
 void commandCopy();
 void commandMove();
 void commandFind();
+
 // ======================================================
 //                    APPLICATIONS
 // ======================================================
 
 void notepad();
-
 void binaryEditor();
-
 void binaryRead();
-
 void binaryHex();
-
 void edoEditor();
-
 void edoRead();
-
 void edoRaw();
-
 void game();
+void calculatorApp();
+void todoApp();
+void systemMonitorApp();
+void debugApp();
 
 // ======================================================
 //                    NETWORK
 // ======================================================
 
 void commandPing(const std::string& host = "");
+void commandApps();
+void commandEcho(const std::string& text);
 
 // ======================================================
 //                    SECURITY
 // ======================================================
 
 void commandSudo();
-
 void commandRoot();
-
 void commandDelete();
 void commandPasswd();
+
 #endif

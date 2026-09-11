@@ -1,6 +1,7 @@
 #include "edora.h"
-#include "login/login.h"
+#include "drivers/driver.h"
 #include "filesystem/filesystem.h"
+#include "login/login.h"
 
 // ======================================================
 //                    EDORA OS
@@ -9,10 +10,11 @@
 
 bool running = true;
 bool isRoot = false;
+string username;
+string password;
 
 fs::path edoraRoot;
 fs::path currentPath;
-
 char currentDrive = 'C';
 
 // ======================================================
@@ -23,8 +25,10 @@ int main()
 {
     edoraRoot = fs::current_path() / "EDORA_DRIVES";
 
-    filesystemInit();
+    edora::DriverManager drivers;
+    drivers.initialize();
 
+    filesystemInit();
     kernelInit();
 
     if (!loginSystem())
@@ -41,6 +45,5 @@ int main()
     }
 
     kernelShutdown();
-
     return 0;
 }

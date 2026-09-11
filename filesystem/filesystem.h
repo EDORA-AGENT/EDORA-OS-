@@ -1,13 +1,14 @@
 #ifndef EDORA_FILESYSTEM_H
 #define EDORA_FILESYSTEM_H
 
+#include <filesystem>
 #include <string>
 
-void filesystemInit();
+#include "../edora.h"
 
+void filesystemInit();
 std::filesystem::path drivePath(char drive);
 std::string getPath();
-
 bool insideDrive(std::filesystem::path path);
 
 void commandDrives();
@@ -17,9 +18,7 @@ void commandMkdir();
 void commandTouch();
 void commandRm();
 void commandCat();
-#include "../edora.h"
-
-void createSystemFile(const fs::path& path, const string& content);
+void createSystemFile(const std::filesystem::path& path, const std::string& content);
 void createSystemFiles();
 void writeBootLog();
 #endif

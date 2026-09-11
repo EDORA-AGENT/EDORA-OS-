@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <cctype>
 
 using namespace std;
 
@@ -19,6 +20,17 @@ void commandPing(const string& host)
 
     if (target.empty())
         return;
+
+    for (char character : target)
+    {
+        if (!isalnum(static_cast<unsigned char>(character)) &&
+            character != '.' && character != '-' && character != ':' &&
+            character != '[' && character != ']')
+        {
+            cout << "Invalid host name.\n";
+            return;
+        }
+    }
 
     cout << "\n";
     cout << "Pinging " << target << "...\n";
