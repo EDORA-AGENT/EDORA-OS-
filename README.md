@@ -4,7 +4,7 @@
 
 <img src="https://img.shields.io/badge/EDORA%20OS-2.3-black?style=for-the-badge&logo=linux" alt="EDORA OS">
 
-<img src="https://img.shields.io/badge/Architecture-i386%20%2B%20x86__64-blue?style=for-the-badge" alt="Architecture">
+<img src="https://img.shields.io/badge/Architecture-i386%20%2B%20x86__64-blue?style=for-the-badge" alt="STOP">
 
 <img src="https://img.shields.io/badge/Boot-BIOS-green?style=for-the-badge" alt="Boot">
 
